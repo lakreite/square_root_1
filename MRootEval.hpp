@@ -2,6 +2,7 @@
 #define MRootEval_hpp_M
 namespace MRootEval
 {
+    constexpr int Infinity_of_roots = -1;
     //! \brief сравнивает объект типа double с нулём
     //! \param[in] x - объект типа double
     //! \return
@@ -29,7 +30,7 @@ namespace MRootEval
     //!              x1 <- меньший корень
     //!              x2 <- меньший корень
     //! \return 
-    //!     -1 если корней бесконечно много
+    //!      MRootEval::Infinity_of_roots если корней бесконечно много
     //!      1 если корень 1 (даже если D = 0)
     //!      2 если корней 2
     auto SquareRootsEval(double a, double b, double c, double& x1, double& x2) -> int;

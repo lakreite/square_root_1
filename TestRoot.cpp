@@ -30,36 +30,22 @@ auto TestSquare::TestRoot::operator==(const TestRoot& arg) -> bool
 
 auto TestSquare::testRootEval() -> void
 {
+#define TESTM(a1, a2, a3, b1, b2, b3)\
+    assert(TestRoot(a1, a2, a3) == TestRoot(b1, b2, b3));\
+    std::cerr << "Assertion " #b1 " x^2 + " #b2 " x + " #b3 " = 0"\
+              << "x1 = " #a1 " x2 = " #a2 " amount is " #a3 " [PASSED]"\
+              << std::endl;
+
     assert(-1 == TestRoot(0., 0., 0.).n);
     std::cerr << "Assertion 0x^2 + 0x + 0 = 0 x = infinity [PASSED]" << std::endl;
-
-    assert(TestRoot(1., 1., 1) == TestRoot(0., 1., -1.));
-    std::cerr << "Assertion 0x^2 + x - 1 = 0 x = 1 [PASSED]" << std::endl;
-
-    assert(TestRoot(0.5, 0.5, 1) == TestRoot(0., 1., -0.5));
-    std::cerr << "Assertion 0x^2 + x - 0.5 = 0 x = 0.5 [PASSED]" << std::endl;
-
-    assert(TestRoot(0.2222, 0.2222, 1) == TestRoot(0., 1., -0.2222));
-    std::cerr << "Assertion 0x^2 + x - 0.2222 = 0 x = 0.2222 [PASSED]" << std::endl;
-
-    assert(TestRoot(0.5, 0.5, 1) == TestRoot(0., 1., -0.5));
-    std::cerr << "Assertion 0x^2 + x - 0.5 = 0 x = 0.5 [PASSED]" << std::endl;
-
-    assert(TestRoot(-0.1, -0.1, 1) == TestRoot(0., 1., 0.1));
-    std::cerr << "Assertion 0x^2 + x + 0.1 = 0 x = -0.1 [PASSED]" << std::endl;
-
-
-
-    assert(TestRoot(-1., -1., 1) == TestRoot(1., 2., 1.));
-    std::cerr << "Assertion x^2 + 2x + 1 = 0 x = -1 [PASSED]" << std::endl;
-
-    assert(TestRoot(-2., -2., 1) == TestRoot(1., 4., 4.));
-    std::cerr << "Assertion x^2 + 4x + 4 = 0 x = -2 [PASSED]" << std::endl;
-
-    assert(TestRoot(1., 0., -2.) == TestRoot(std::sqrt(2), -std::sqrt(2), 2));
-    std::cerr << "Assertion x^2 + x - 2 = 0; x1 = 2 x2 = -2 [PASSED]" << std::endl;
-
-    assert(TestRoot(0., 0., 0) == TestRoot(1., 0., 2.));
-    std::cerr << "Assertion x^2 + x - 1 = 0 x are not real [PASSED]" << std::endl;
-
+    
+    TESTM(    1.,  1.,      1,           0.,            1.,     -1.);
+    TESTM(   0.5, 0.5,      1,           0.,            1.,    -0.5);
+    TESTM(0.2222, 0.2222,   1,           0.,            1., -0.2222);
+    TESTM(   0.5,    0.5,   1,           0.,            1.,    -0.5);
+    TESTM(  -0.1,   -0.1,   1,           0.,            1.,     0.1);
+    TESTM(   -1.,    -1.,   1,           1.,            2.,      1.);
+    TESTM(   -2.,    -2.,   1,           1.,            4.,      4.);
+    TESTM(    1.,     0., -2., std::sqrt(2), -std::sqrt(2),       2);
+    TESTM(    0.,     0.,   0,           1.,            0.,      2.);
 }

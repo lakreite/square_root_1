@@ -13,7 +13,7 @@ MRootEval::SquareRootsEval(double a, double b, double c, double& x1, double& x2)
     if (IsZero(a))
         if (IsZero(b))
             if (IsZero(c))
-                return -1;
+                return MRootEval::Infinity_of_roots;
             else
             {
                 x1 = x2 = std::numeric_limits<double>::quiet_NaN();
@@ -26,17 +26,17 @@ MRootEval::SquareRootsEval(double a, double b, double c, double& x1, double& x2)
         }
     double d = b * b - 4 * a * c;
 
+    if (IsZero(d))
+    {
+        x1 = x2 = (-b) / (2 * a);
+        return 1;
+    }
     if (d < 0)
     {
         x1 = x2 = std::numeric_limits<double>::quiet_NaN();
         return 0;
     }
 
-    if (IsZero(d))
-    {
-        x1 = x2 = (-b) / (2 * a);
-        return 1;
-    }
 
     b = (-b) / (2 * a);
     d = std::sqrt(d) / (2 * a);
