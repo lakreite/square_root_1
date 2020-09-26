@@ -1,12 +1,14 @@
 #include"MRootEval.hpp"
 #include<limits>
 #include<cmath>
-inline auto MRootEval::IsZero(double x) -> bool
+auto inline 
+MRootEval::IsZero(double x) -> bool
 {
-    return static_cast<int>(std::fabs(x) < std::numeric_limits<double>::epsilon());
+    return std::fabs(x) < std::numeric_limits<double>::epsilon();
 }
 
-auto MRootEval::SquareRootsEval(double a, double b, double c, double& x1, double& x2) -> int
+auto 
+MRootEval::SquareRootsEval(double a, double b, double c, double& x1, double& x2) -> int
 {
     if (IsZero(a))
         if (IsZero(b))
